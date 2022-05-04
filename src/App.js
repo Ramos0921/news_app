@@ -1,24 +1,36 @@
-import logo from './logo.svg';
+import { createTheme, ThemeProvider } from '@material-ui/core';
+import { BrowserRouter as Router, Routes, Route, Switch } from 'react-router-dom'
 import './App.css';
+import { NavBar } from './components/Nav';
+import { Categories } from './components/Categories';
+import { TopNews } from './components/TopNews';
+import { SearchNews } from './components/SearchNews';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#2AC3AD'
+    }
+  }
+})
+
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <Router>
+        <div className="nav-header" style={{height: '64px'}}>
+         <NavBar />
+        </div>
+        <Routes> 
+            <Route exact path="/" element={<TopNews/>} />
+            <Route exact path="/top-news" element={<TopNews/>} />
+            <Route exact path="/categories" element={<Categories/>} />
+            <Route exact path="/search-news" element={<SearchNews/>} />
+        </Routes>
+      </Router>
+    </ThemeProvider>
   );
 }
 
